@@ -1,0 +1,857 @@
+/**
+ * AgentOdyssey — Ultra Modern Theme
+ * Primary: #1d4ed8 (deep blue)  |  Surface: Slate palette
+ * Inspired by Linear, Vercel, Stripe design systems
+ * Clean, sharp, non-bland documentation styling
+ */
+
+/* ═══════════════════════════════════════════
+   1. CSS Variables
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* Primary colour ramp — deep blue */
+  --ifm-color-primary: #1d4ed8;
+  --ifm-color-primary-dark: #1e40af;
+  --ifm-color-primary-darker: #1e3a8a;
+  --ifm-color-primary-darkest: #172554;
+  --ifm-color-primary-light: #2563eb;
+  --ifm-color-primary-lighter: #3b82f6;
+  --ifm-color-primary-lightest: #60a5fa;
+
+  /* Accent */
+  --ifm-color-secondary: #0ea5e9;
+  --site-color-highlight: #0ea5e9;
+
+  /* Background & surface */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc;
+
+  /* Typography */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-weight: 600;
+  --ifm-font-family-monospace: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, monospace;
+  --ifm-font-color-base: #1e293b;
+  --ifm-heading-color: #0f172a;
+  --ifm-font-size-base: 15.5px;
+  --ifm-code-font-size: 88%;
+  --ifm-line-height-base: 1.7;
+  --ifm-link-color: #1d4ed8;
+  --ifm-link-hover-color: #1e40af;
+
+  /* Layout */
+  --ifm-global-radius: 8px;
+  --doc-sidebar-width: 280px;
+
+  /* Navbar / Footer */
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.85);
+  --ifm-navbar-link-color: #475569;
+  --ifm-navbar-link-hover-color: #0f172a;
+  --ifm-navbar-height: 3.75rem;
+  --ifm-footer-background-color: #f8fafc;
+  --ifm-footer-color: #64748b;
+
+  --docusaurus-highlighted-code-line-bg: rgba(29, 78, 216, 0.1);
+}
+
+
+/* ═══════════════════════════════════════════
+   2. Google Font Import
+   ═══════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+
+/* ═══════════════════════════════════════════
+   2b. Disable overscroll bounce
+   ═══════════════════════════════════════════ */
+html, body {
+  overscroll-behavior: none;
+}
+
+
+/* ═══════════════════════════════════════════
+   3. Navbar — Frosted glass, clean white
+   ═══════════════════════════════════════════ */
+.navbar {
+  background-color: var(--ifm-navbar-background-color);
+  box-shadow: none;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 200;
+}
+.navbar__inner {
+  display: flex;
+  align-items: center;
+}
+.navbar__items {
+  align-items: center;
+}
+.navbar__title {
+  color: #d4a017 !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.10em;
+  font-family: 'Cinzel', 'Inter', sans-serif;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(212, 160, 23, 0.18));
+}
+
+.navbar__link {
+  color: #64748b !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+.navbar__link:hover {
+  color: #0f172a !important;
+  background-color: #f1f5f9;
+}
+.navbar__link--active {
+  color: #1d4ed8 !important;
+  font-weight: 600;
+}
+
+/* GitHub icon link in navbar */
+.navbar__items--right .navbar__link {
+  color: #94a3b8 !important;
+}
+.navbar__items--right .navbar__link:hover {
+  color: #0f172a !important;
+  background-color: #f1f5f9;
+}
+
+/* Icon-only GitHub link (navbar right) — uses CSS mask so hover just changes color */
+.header-github-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem !important;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+.header-github-link::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-color: #64748b;
+  transition: background-color 0.15s ease;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.header-github-link:hover {
+  background-color: #f1f5f9;
+}
+.header-github-link:hover::before {
+  background-color: #0f172a;
+}
+
+/* Mobile hamburger */
+.navbar__toggle {
+  color: #334155;
+}
+
+/* Mobile sidebar overlay */
+.navbar-sidebar {
+  background: #fff;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+  z-index: 200;
+}
+.navbar-sidebar--show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  max-width: 350px;
+  height: 100%;
+  z-index: 200;
+}
+.navbar-sidebar__backdrop {
+  z-index: 199;
+}
+.navbar-sidebar .navbar__title {
+  color: #0f172a !important;
+}
+.navbar-sidebar .navbar__link {
+  color: #334155 !important;
+}
+.navbar-sidebar .navbar__link:hover {
+  color: #1d4ed8 !important;
+}
+.navbar-sidebar .menu__link {
+  color: #334155 !important;
+}
+.navbar-sidebar .menu__link:hover {
+  color: #1d4ed8 !important;
+}
+
+
+/* ═══════════════════════════════════════════
+   4. Footer — Minimal & light
+   ═══════════════════════════════════════════ */
+.footer {
+  background-color: var(--ifm-footer-background-color);
+  color: var(--ifm-footer-color);
+  padding: 1.75rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+.footer--dark {
+  --ifm-footer-background-color: #f8fafc;
+  --ifm-footer-color: #64748b;
+  --ifm-footer-link-color: #475569;
+  background-color: #f8fafc;
+}
+.footer__copyright {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  letter-spacing: 0.01em;
+}
+.footer__link-item {
+  color: #64748b;
+  transition: color 0.15s ease;
+}
+.footer__link-item:hover {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+
+/* ═══════════════════════════════════════════
+   5. Sidebar — Always expanded, flat structure
+   ═══════════════════════════════════════════ */
+.menu {
+  padding: 1rem 0.75rem !important;
+  font-size: 0.875rem;
+}
+
+/* All sidebar links */
+.menu__link {
+  color: #64748b;
+  font-weight: 450;
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  transition: all 0.15s ease;
+  border: none;
+  margin: 1px 0;
+}
+
+.menu__link:hover {
+  color: #0f172a;
+  background-color: #f1f5f9;
+  text-decoration: none;
+}
+
+/* Active page — modern blue pill highlight */
+.menu__link--active:not(.menu__link--sublist) {
+  color: #1d4ed8 !important;
+  font-weight: 600;
+  background-color: #eff6ff;
+  border-left: none;
+  border: none;
+}
+
+/* Active category heading */
+.menu__link--active.menu__link--sublist {
+  color: #0f172a !important;
+  font-weight: 600;
+}
+
+/* Category labels — always visible, no collapse */
+.menu__list-item-collapsible > .menu__link {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  padding: 0.6rem 0.75rem 0.3rem;
+}
+.menu__list-item-collapsible > .menu__link:hover {
+  background: none;
+  color: #64748b;
+}
+
+/* Force all categories to stay expanded — hide collapse UI (doc sidebar only) */
+.theme-doc-sidebar-container .menu__caret,
+.theme-doc-sidebar-container .menu__link--sublist-caret::after {
+  display: none !important;
+}
+
+/* Ensure nested lists are always visible (doc sidebar only) */
+.theme-doc-sidebar-container .menu__list-item-collapsible + .menu__list,
+.theme-doc-sidebar-container .menu__list .menu__list {
+  display: block !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+/* Nested list indent */
+.menu__list .menu__list {
+  padding-left: 0.75rem;
+  border-left: 1.5px solid #e2e8f0;
+  margin-left: 0.75rem;
+}
+
+/* Remove collapsible button styling (doc sidebar only) */
+.theme-doc-sidebar-container .menu__list-item-collapsible {
+  cursor: default;
+}
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover {
+  background: none;
+}
+
+/* ── Mobile sidebar ── */
+@media (max-width: 996px) {
+  /* Give the mobile navbar-sidebar some breathing room */
+  .navbar-sidebar .menu {
+    padding: 0.75rem !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════
+   6. Doc Page — Content Area
+   ═══════════════════════════════════════════ */
+
+/* Main doc container */
+.docMainContainer_node_modules,
+[class*="docMainContainer"] {
+  background: #fff;
+}
+
+/* Add bottom space so last TOC section can scroll into highlight range */
+article[class*="docItemContainer"],
+[class*="docItemContainer"] {
+  padding-bottom: 50vh;
+}
+
+/* Markdown body */
+.markdown {
+  --ifm-heading-vertical-rhythm-bottom: 0.6;
+}
+
+.markdown h1 {
+  font-size: 2.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  font-family: var(--ifm-font-family-base);
+}
+
+.markdown h2 {
+  font-size: 1.45rem;
+  font-weight: 650;
+  color: #0f172a;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e2e8f0;
+  letter-spacing: -0.02em;
+  font-family: var(--ifm-font-family-base);
+}
+
+.markdown h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  font-family: var(--ifm-font-family-base);
+}
+
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-family: var(--ifm-font-family-base);
+}
+
+.markdown p {
+  color: #334155;
+  line-height: 1.75;
+  margin-bottom: 1.1rem;
+  font-size: 1rem;
+}
+
+.markdown li {
+  color: #334155;
+  line-height: 1.7;
+  margin-bottom: 0.25rem;
+  font-size: 0.97rem;
+}
+
+/* Links inside docs */
+.markdown a {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-decoration-color: rgba(29, 78, 216, 0.3);
+  text-underline-offset: 2px;
+  transition: all 0.15s ease;
+}
+.markdown a:hover {
+  color: #1e40af;
+  text-decoration-color: #1d4ed8;
+}
+
+/* Strong / bold */
+.markdown strong {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+
+/* ═══════════════════════════════════════════
+   7. Code Blocks — Light
+   ═══════════════════════════════════════════ */
+.prism-code {
+  border-radius: 10px !important;
+  border: none !important;
+  font-size: 0.97rem !important;
+  line-height: 1.65 !important;
+  padding: 1rem 1.25rem !important;
+  background: #f1f5f9ad !important;
+}
+
+/* Code block container */
+div[class*="codeBlockContainer"] {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+  margin: 1.25rem 0;
+  background: #f1f5f9ad;
+}
+
+/* Title bar */
+div[class*="codeBlockTitle"] {
+  background: #e8eef6 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 1rem !important;
+  letter-spacing: 0.02em;
+}
+
+/* Code block content */
+div[class*="codeBlockContent"] {
+  background: #f1f5f9;
+}
+
+/* Copy button */
+button[class*="copyButton"] {
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  transition: color 0.15s ease;
+}
+button[class*="copyButton"]:hover {
+  background: transparent;
+  color: #475569;
+}
+
+/* Highlighted line */
+.docusaurus-highlight-code-line {
+  background-color: rgba(29, 78, 216, 0.08);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 2px solid #1d4ed8;
+}
+
+/* Line numbers */
+.prism-code .token-line span[class*="lineNumber"] {
+  color: #94a3b8;
+  margin-right: 1.5em;
+  user-select: none;
+}
+
+/* Inline code */
+.markdown code {
+  background: #e8eef5;
+  border: 1px solid #d5dce8;
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.84em;
+  color: #b91c58;
+  font-weight: 500;
+  font-family: var(--ifm-font-family-monospace);
+  letter-spacing: -0.01em;
+}
+
+/* Don't style code inside code blocks */
+.prism-code code {
+  background: none !important;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-weight: normal;
+}
+
+
+/* ═══════════════════════════════════════════
+   8. Tables — Clean modern
+   ═══════════════════════════════════════════ */
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.markdown table thead tr {
+  background: #f8fafc;
+}
+
+.markdown table th {
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.markdown table td {
+  padding: 0.65rem 1rem;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.markdown table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown table tbody tr:hover {
+  background: #f8fafc;
+}
+
+
+/* ═══════════════════════════════════════════
+   9. TOC (Right sidebar)
+   ═══════════════════════════════════════════ */
+.table-of-contents {
+  font-size: 0.82rem;
+  border-left: 1.5px solid #e2e8f0;
+  padding-left: 0.75rem;
+}
+
+.table-of-contents__link {
+  color: #94a3b8;
+  transition: all 0.15s ease;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+}
+
+.table-of-contents__link:hover {
+  color: #475569;
+  text-decoration: none;
+}
+
+.table-of-contents__link--active {
+  color: #1d4ed8 !important;
+  font-weight: 600;
+}
+
+
+/* ═══════════════════════════════════════════
+   10. Breadcrumbs
+   ═══════════════════════════════════════════ */
+.breadcrumbs__item {
+  font-size: 0.82rem;
+}
+
+.breadcrumbs__link {
+  color: #94a3b8;
+  background: none !important;
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.breadcrumbs__link:hover {
+  color: #475569;
+  background: #f1f5f9 !important;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: #334155;
+  font-weight: 500;
+  background: none !important;
+}
+
+
+/* ═══════════════════════════════════════════
+   11. Pagination (Prev / Next)
+   ═══════════════════════════════════════════ */
+.pagination-nav__link {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.pagination-nav__link:hover {
+  border-color: #1d4ed8;
+  box-shadow: 0 2px 12px rgba(29, 78, 216, 0.08);
+  background: #fafbff;
+}
+
+.pagination-nav__sublabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.pagination-nav__label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+
+/* ═══════════════════════════════════════════
+   12. Admonitions / Callouts
+   ═══════════════════════════════════════════ */
+.alert {
+  border-radius: 10px;
+  border-width: 1px;
+  border-left-width: 4px;
+  box-shadow: none;
+  font-size: 0.92rem;
+}
+
+.alert .admonitionHeading_node_modules,
+.alert [class*="admonitionHeading"] {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* ═══════════════════════════════════════════
+   13. Scrollbar (Webkit)
+   ═══════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* ═══════════════════════════════════════════
+   14. Buttons
+   ═══════════════════════════════════════════ */
+.button--primary {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.button--primary:hover {
+  background-color: #1e40af;
+  border-color: #1e40af;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
+}
+.button--secondary {
+  background-color: #0f172a;
+  border-color: #0f172a;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.button--secondary:hover {
+  background-color: #1e293b;
+  border-color: #1e293b;
+  color: #fff;
+}
+
+
+/* ═══════════════════════════════════════════
+   15. Selection highlight
+   ═══════════════════════════════════════════ */
+::selection {
+  background: rgba(37, 99, 235, 0.15);
+  color: inherit;
+}
+
+
+/* ═══════════════════════════════════════════
+   16. Smooth transitions everywhere
+   ═══════════════════════════════════════════ */
+a, .menu__link, .table-of-contents__link,
+.pagination-nav__link, button {
+  transition: all 0.15s ease;
+}
+
+
+/* ═══════════════════════════════════════════
+   17. Search Bar — Modern techy style
+   ═══════════════════════════════════════════ */
+
+/* Search button / trigger in navbar */
+.navbar .DocSearch-Button,
+.navbar .search-bar-wrapper input,
+.navbar [class*="searchBar"] input {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #334155;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  height: auto;
+}
+
+.navbar .DocSearch-Button:hover,
+.navbar .search-bar-wrapper input:hover,
+.navbar [class*="searchBar"] input:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.navbar .DocSearch-Button:focus,
+.navbar .search-bar-wrapper input:focus,
+.navbar [class*="searchBar"] input:focus {
+  border-color: #1d4ed8;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+  outline: none;
+}
+
+/* Search icon color */
+.DocSearch-Button .DocSearch-Search-Icon,
+[class*="searchBar"] svg {
+  color: #94a3b8;
+  width: 16px;
+  height: 16px;
+}
+
+/* Placeholder text */
+.DocSearch-Button-Placeholder,
+[class*="searchBar"] input::placeholder {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Keyboard shortcut badge */
+.DocSearch-Button-Keys {
+  display: flex;
+  gap: 2px;
+}
+.DocSearch-Button-Key {
+  background: #e2e8f0;
+  border: none;
+  border-radius: 4px;
+  color: #64748b;
+  font-size: 0.7rem;
+  font-family: var(--ifm-font-family-base);
+  padding: 0 5px;
+  box-shadow: none;
+  min-width: auto;
+}
+
+/* ── Search modal / dropdown ── */
+.search-result-match {
+  color: #1d4ed8;
+  background: rgba(29, 78, 216, 0.08);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Local search dropdown */
+[class*="searchResultsColumn"],
+.search-result-container,
+.DocSearch-Modal {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Dropdown panel */
+.dropdown > .menu,
+[class*="searchModal"],
+.DocSearch-Modal {
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Search result items */
+.DocSearch-Hit a,
+[class*="searchResult"] a {
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  transition: all 0.1s ease;
+}
+
+.DocSearch-Hit[aria-selected="true"] a,
+[class*="searchResult"] a:hover {
+  background: #f1f5f9;
+}
+
+/* Search result title */
+.DocSearch-Hit-title,
+[class*="searchResultTitle"] {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+/* Search result path / breadcrumb */
+.DocSearch-Hit-path,
+[class*="searchResultPath"] {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+/* No results */
+.DocSearch-NoResults .DocSearch-Screen-Icon,
+[class*="noResults"] {
+  color: #cbd5e1;
+}
+
+/* Highlighted term on target page */
+.search-result-match-highlight,
+[class*="searchTermHighlight"],
+mark[data-search] {
+  background: rgba(29, 78, 216, 0.12);
+  color: #1d4ed8;
+  border-radius: 2px;
+  padding: 0.05em 0.15em;
+}
