@@ -154,7 +154,7 @@ const FINDINGS = [
   },
 ];
 
-const CITATION = `@inproceedings{agentodyssey2026,
+const CITATION = `@article{agentodyssey2026,
   title     = {AgentOdyssey: Open-Ended Long-Horizon Text Game Generation for Test-Time Continual Learning Agents},
   author    = {Zhang, Zheyuan and Wen, Zehao and Zhang, Alvin and Wang, Andrew and Xie, Jianwen and Khashabi, Daniel and Shu, Tianmin},
   year      = {2026},
@@ -548,7 +548,7 @@ function Citation() {
             <div className={styles.citationBlock}>
               <CopyButton text={CITATION} />
               <pre className={styles.codeBlock}>
-                <span className={styles.bibKeyword}>@inproceedings</span>
+                <span className={styles.bibKeyword}>@article</span>
                 {'{agentodyssey2026,\n'}
                 {'  '}
                 <span className={styles.bibField}>title</span>
