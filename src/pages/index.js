@@ -154,9 +154,10 @@ const FINDINGS = [
   },
 ];
 
-const CITATION = `@article{agentodyssey2026,
+const CITATION = `@article{zhang2026agentodyssey,
   title     = {AgentOdyssey: Open-Ended Long-Horizon Text Game Generation for Test-Time Continual Learning Agents},
   author    = {Zhang, Zheyuan and Wen, Zehao and Zhang, Alvin and Wang, Andrew and Xie, Jianwen and Khashabi, Daniel and Shu, Tianmin},
+  journal   = {arXiv preprint arXiv:2606.24893},
   year      = {2026},
 }`;
 
@@ -549,7 +550,7 @@ function Citation() {
               <CopyButton text={CITATION} />
               <pre className={styles.codeBlock}>
                 <span className={styles.bibKeyword}>@article</span>
-                {'{agentodyssey2026,\n'}
+                {'{zhang2026agentodyssey,\n'}
                 {'  '}
                 <span className={styles.bibField}>title</span>
                 {'     = {'}
@@ -561,11 +562,11 @@ function Citation() {
                 <span className={styles.bibValue}>Zhang, Zheyuan and Wen, Zehao and Zhang, Alvin and Wang, Andrew and Xie, Jianwen and Khashabi, Daniel and Shu, Tianmin</span>
                 {'},\n'}
                 {'  '}
-                {/* <span className={styles.bibField}>journal</span>
+                <span className={styles.bibField}>journal</span>
                 {'   = {'}
-                <span className={styles.bibValue}>arXiv preprint arXiv:xxxx.xxxxx</span>
+                <span className={styles.bibValue}>arXiv preprint arXiv:2606.24893</span>
                 {'},\n'}
-                {'  '} */}
+                {'  '}
                 <span className={styles.bibField}>year</span>
                 {'      = {'}
                 <span className={styles.bibValue}>2026</span>
