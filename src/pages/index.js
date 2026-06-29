@@ -26,7 +26,7 @@ const AUTHOR_NOTE = '* Equal contribution · † Equal advising';
 const LINKS = [
   { label: '🎮 Interactive Demo', href: '/demo', color: 'green' },
   { label: '📖 Documentation', href: '/docs', color: 'blue' },
-  { label: '📄 Paper', href: '/paper.pdf', color: 'red' },
+  { label: '📄 Paper', href: 'https://arxiv.org/abs/2606.24893', color: 'red' },
   { label: 'Code', href: 'https://github.com/agentodyssey/agentodyssey', color: 'purple', icon: 'github' },
 ];
 
