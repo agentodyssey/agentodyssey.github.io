@@ -8,17 +8,28 @@ import styles from './index.module.css';
    Data — replace with your real content
    ──────────────────────────────────────── */
 const AUTHORS = [
-  { name: 'Zheyuan Zhang', sup: '*', href: 'https://zheyuanzhang.me/' },
-  { name: 'Zehao Wen', sup: '*', href: 'https://zehaowen.com/' },
-  { name: 'Alvin Zhang', href: 'https://scholar.google.com/citations?user=BLkk5kYAAAAJ' },
-  { name: 'Andrew Wang', href: 'https://andrewwnlp.github.io/' },
-  { name: 'Jianwen Xie', href: 'http://www.stat.ucla.edu/~jxie/' },
-  { name: 'Daniel Khashabi', sup: '†', href: 'https://danielkhashabi.com/' },
-  { name: 'Tianmin Shu', sup: '†', href: 'https://www.tshu.io/' }
+  { name: 'Zheyuan Zhang', affiliation: 1, sup: '*', href: 'https://zheyuanzhang.me/' },
+  { name: 'Zehao Wen', affiliation: 1, sup: '*', href: 'https://zehaowen.com/' },
+  { name: 'Alvin Zhang', affiliation: 1, href: 'https://scholar.google.com/citations?user=BLkk5kYAAAAJ' },
+  { name: 'Andrew Wang', affiliation: 1, href: 'https://andrewwnlp.github.io/' },
+  { name: 'Jianwen Xie', affiliation: 2, href: 'http://www.stat.ucla.edu/~jxie/' },
+  { name: 'Daniel Khashabi', affiliation: 1, sup: '†', href: 'https://danielkhashabi.com/' },
+  { name: 'Tianmin Shu', affiliation: 1, sup: '†', href: 'https://www.tshu.io/' }
 ];
 
 const AFFILIATIONS = [
-  'Johns Hopkins University'
+  {
+    id: 1,
+    name: 'Johns Hopkins University',
+    href: 'https://www.jhu.edu/',
+    logo: '/img/affiliations/jhu-logo-white.svg',
+  },
+  {
+    id: 2,
+    name: 'Lambda',
+    href: 'https://lambda.ai/',
+    logo: '/img/affiliations/lambda-logo-white.svg',
+  },
 ];
 
 const AUTHOR_NOTE = '* Equal contribution · † Equal advising';
@@ -304,15 +315,24 @@ function Hero() {
             <span key={a.name}>
               {i > 0 && ' · '}
               <a href={a.href} className={styles.authorLink} target="_blank" rel="noopener noreferrer">
-                {a.name}<sup>{a.sup}</sup>
+                {a.name}<sup>{a.affiliation}{a.sup && `,${a.sup}`}</sup>
               </a>
             </span>
           ))}
         </p>
         <p className={styles.affiliations}>
-          {AFFILIATIONS.join('   ')}
+          {AFFILIATIONS.map(({ id, name }) => (
+            <span key={id}><sup>{id}</sup> {name}</span>
+          ))}
         </p>
         <p className={styles.authorNote}>{AUTHOR_NOTE}</p>
+        <div className={styles.affiliationLogos}>
+          {AFFILIATIONS.map(({ id, name, href, logo }) => (
+            <a key={id} href={href} className={styles.affiliationLogoLink} target="_blank" rel="noopener noreferrer">
+              <img src={logo} alt={`${name} logo`} className={styles.affiliationLogo} />
+            </a>
+          ))}
+        </div>
         <div className={styles.linkRow}>
           {LINKS.map(({ label, href, color, icon }) => {
             const colorClass = {

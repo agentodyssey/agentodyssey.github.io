@@ -170,6 +170,7 @@
 .authorLink {
   color: #ffffff;
   text-decoration: none;
+  white-space: nowrap;
   transition: color 0.15s ease;
 }
 .authorLink:hover {
@@ -178,6 +179,10 @@
 }
 
 .affiliations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.75rem;
   font-size: 1.18rem;
   margin-bottom: 0.4rem;
   color: #fde68a;
@@ -188,6 +193,36 @@
   color: #fcd34d;
   font-style: italic;
   margin-bottom: 1.6rem;
+}
+
+.affiliationLogos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.affiliationLogoLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 72px;
+  border-radius: 4px;
+}
+
+.affiliationLogoLink:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 4px;
+}
+
+.affiliationLogo {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .linkRow {
